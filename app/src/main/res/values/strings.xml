@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CryptoPulse</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_market">Market</string>
+    <string name="nav_analysis">Analysis</string>
+    <string name="nav_wallet">Wallet</string>
+    <string name="nav_news">News</string>
+    <string name="search_hint">Search markets, assets…</string>
+    <string name="trade_now">Trade Now</string>
+    <string name="see_all">SEE ALL</string>
+    <string name="execute_trade">EXECUTE TRADE STRATEGY</string>
+    <string name="live_feed">LIVE WEBSOCKET FEED CONNECTED</string>
+    <string name="error_network">Network error. Please retry.</string>
+    <string name="retry">Retry</string>
+    <string name="strong_bullish">STRONG BULLISH</string>
+    <string name="strong_buy">STRONG BUY</string>
+    <string name="wallet_tracker">Wallet Tracker</string>
+    <string name="market_intelligence">Market Intelligence</string>
+    <string name="enter_terminal">ENTER TERMINAL</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="email_hint">name@pulse.io</string>
+    <string name="password">PASSWORD</string>
+    <string name="forgot">FORGOT?</string>
+    <string name="or_sign_in_with">THIRD PARTY IDENTITY</string>
+    <string name="google">GOOGLE</string>
+    <string name="apple">APPLE</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="establish_node">Establish Node</string>
+    <string name="track_analysis">Track Analysis</string>
+    <string name="load_more">LOAD HISTORICAL INTEL</string>
+    <string name="hot_asset">HOT ASSET</string>
+    <string name="sentiment">SENTIMENT</string>
+    <string name="greed">Greed</string>
+    <string name="ai_sentiment_score">AI SENTIMENT SCORE</string>
+    <string name="momentum_analysis">MOMENTUM ANALYSIS</string>
+    <string name="pulse_ai_analysis">PULSE AI ANALYSIS</string>
+    <string name="technical_indicators">TECHNICAL INDICATORS</string>
+    <string name="live_data_feed">Live Data Feed</string>
+    <string name="live_portfolio">LIVE PORTFOLIO</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="popular">Phổ biến</string>
+    <string name="favorites">Yêu thích</string>
+</resources>

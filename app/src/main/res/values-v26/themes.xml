@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- v26+ inherits base theme, adaptive icons work properly -->
+    <style name="Theme.CryptoPulse.Splash" parent="Theme.CryptoPulse">
+        <item name="android:windowBackground">@color/bg_primary</item>
+    </style>
+</resources>

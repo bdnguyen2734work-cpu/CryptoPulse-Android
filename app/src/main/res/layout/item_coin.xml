@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal" android:gravity="center_vertical"
+    android:paddingHorizontal="20dp" android:paddingVertical="14dp"
+    android:background="@drawable/ripple_card">
+
+    <ImageView
+        android:id="@+id/iv_coin_logo"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="14dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/iv_coin_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/bg_primary"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:background="@drawable/ic_dot_live"
+        android:layout_marginEnd="14dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_weight="1" android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_coin_symbol"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="15sp" android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif" android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_coin_name"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:fontFamily="sans-serif"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="end">
+        <TextView
+            android:id="@+id/tv_coin_price"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="15sp" android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" android:layout_marginBottom="4dp"/>
+        <TextView
+            android:id="@+id/tv_coin_change"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="11sp" android:textColor="@color/accent_green"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="8dp" android:paddingVertical="2dp"/>
+    </LinearLayout>
+</LinearLayout>

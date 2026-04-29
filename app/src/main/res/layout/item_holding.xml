@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:background="@drawable/bg_card"
+    android:padding="16dp" android:layout_marginBottom="10dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:id="@+id/tvTokenIcon"
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:background="@drawable/bg_pill_dark" android:gravity="center"
+            android:textSize="14sp" android:textStyle="bold" android:textColor="@color/accent_green"
+            android:layout_marginEnd="12dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView android:id="@+id/tvTokenAmount"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="12.4 ETH" android:textSize="18sp" android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
+            <TextView android:id="@+id/tvTokenUsdValue"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="$29,030.88" android:textSize="13sp" android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="end">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="PRICE" android:textSize="10sp" android:textColor="@color/text_secondary"
+                android:letterSpacing="0.05"/>
+            <TextView android:id="@+id/tvTokenPrice"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="$2,341.20" android:textSize="14sp" android:textStyle="bold"
+                android:textColor="@color/text_primary"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View android:id="@+id/progressBar"
+        android:layout_width="match_parent" android:layout_height="3dp"
+        android:layout_marginTop="12dp" android:background="@color/accent_green"/>
+</LinearLayout>

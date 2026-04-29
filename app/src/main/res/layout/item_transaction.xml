@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="14dp" app:cardElevation="0dp"
+    app:strokeColor="@color/border" app:strokeWidth="1dp">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="16dp">
+
+        <!-- Main row -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+
+            <TextView android:id="@+id/tv_tx_icon"
+                android:layout_width="36dp" android:layout_height="36dp"
+                android:gravity="center" android:textSize="16sp"
+                android:textStyle="bold" android:layout_marginEnd="12dp"/>
+
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:id="@+id/tv_tx_desc"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="14sp" android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif" android:textStyle="bold"/>
+                <TextView android:id="@+id/tv_tx_address"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="11sp" android:textColor="@color/text_secondary"
+                    android:fontFamily="sans-serif" android:layout_marginTop="2dp"/>
+                <TextView android:id="@+id/tv_tx_time"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="10sp" android:textColor="@color/text_tertiary"
+                    android:fontFamily="sans-serif"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:orientation="vertical" android:gravity="end">
+                <TextView android:id="@+id/tv_tx_amount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="14sp" android:textColor="@color/accent_green"
+                    android:fontFamily="sans-serif-medium" android:textStyle="bold"/>
+                <TextView android:id="@+id/tv_tx_value"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:textSize="11sp" android:textColor="@color/text_secondary"
+                    android:fontFamily="sans-serif" android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Status + expand row -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
+            <TextView android:id="@+id/tv_tx_status"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="11sp" android:textColor="@color/accent_green"
+                android:fontFamily="sans-serif-medium"/>
+            <TextView android:id="@+id/tv_tx_expand"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="▼ Chi tiết"
+                android:textSize="11sp" android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
+
+        <!-- Expanded detail -->
+        <LinearLayout android:id="@+id/layout_tx_detail"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:background="#0A39FF6E"
+            android:padding="10dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="TX HASH"
+                android:textSize="9sp" android:textColor="@color/text_tertiary"
+                android:letterSpacing="0.08" android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="4dp"/>
+            <TextView android:id="@+id/tv_tx_hash"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="10sp" android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif"
+                android:maxLines="2"
+                android:ellipsize="middle"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
