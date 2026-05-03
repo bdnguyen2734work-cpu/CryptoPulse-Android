@@ -25,7 +25,7 @@
             android:padding="16dp"
             android:foreground="?attr/selectableItemBackground">
 
-            <!-- Category + Time -->
+            <!-- Category + Time + Delete Button -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,6 +61,18 @@
                     android:textSize="11sp"
                     android:textColor="@color/text_tertiary"
                     android:fontFamily="sans-serif"/>
+
+                <!-- NÚT XÓA (Chỉ Admin mới thấy) -->
+                <ImageView
+                    android:id="@+id/btn_delete_news"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="14dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="3dp"
+                    android:src="@android:drawable/ic_menu_delete"
+                    android:visibility="gone"
+                    app:tint="#FF3B30" />
             </LinearLayout>
 
             <!-- Title -->
@@ -76,8 +88,6 @@
                 android:maxLines="3"
                 android:ellipsize="end"
                 android:layout_marginBottom="10dp"/>
-
-            <!-- Thumbnail: FrameLayout bọc ngoài để kiểm soát background + padding -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp"

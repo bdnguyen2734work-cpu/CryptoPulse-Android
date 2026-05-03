@@ -15,10 +15,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MarketViewModel extends ViewModel {
+    // ─── TRẠNG THÁI TOÀN CỤC ───
+    private final MutableLiveData<Boolean>                 loginState         = new MutableLiveData<>();
+    private final MutableLiveData<Boolean>                 profileUpdated     = new MutableLiveData<>(); // Tín hiệu đổi ảnh
 
-    // ══════════════════════════════════════════════════════════════
-    //  LIVE DATA
-    // ══════════════════════════════════════════════════════════════
     private final MutableLiveData<Map<String, CoinTicker>> liveTickers        = new MutableLiveData<>();
     private final MutableLiveData<List<Kline>>             liveKlines         = new MutableLiveData<>();
     private final MutableLiveData<List<Kline>>             liveKlinesPrepend  = new MutableLiveData<>();
@@ -34,8 +34,15 @@ public class MarketViewModel extends ViewModel {
     private final MutableLiveData<Map<String, Object>>     liveKlineHistory   = new MutableLiveData<>();
 
     // ══════════════════════════════════════════════════════════════
-    //  GETTERS
+    //  GETTERS & SETTERS
     // ══════════════════════════════════════════════════════════════
+    public LiveData<Boolean>                 getLoginState()       { return loginState; }
+    public void setLoginState(boolean isLoggedIn)                  { loginState.setValue(isLoggedIn); }
+
+    // Gọi hàm này khi muốn báo cho toàn App biết Profile/Ảnh đã thay đổi
+    public LiveData<Boolean>                 getProfileUpdated()   { return profileUpdated; }
+    public void triggerProfileUpdate()                             { profileUpdated.setValue(true); }
+
     public LiveData<Map<String, CoinTicker>> getTickers()        { return liveTickers; }
     public LiveData<List<Kline>>             getKlines()         { return liveKlines; }
     public LiveData<List<Kline>>             getKlinesPrepend()  { return liveKlinesPrepend; }
@@ -58,7 +65,7 @@ public class MarketViewModel extends ViewModel {
     }
 
     // ══════════════════════════════════════════════════════════════
-    //  KLINES — Binance trực tiếp (fresh load)
+    //  KLINES — Binance
     // ══════════════════════════════════════════════════════════════
     public void loadKlines(String symbol, String interval, int limit) {
         liveLoading.setValue(true);

@@ -1,5 +1,7 @@
 package com.cryptopulse.app.adapters;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,7 +21,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.cryptopulse.app.R;
 import com.cryptopulse.app.models.NewsItem;
+import com.cryptopulse.app.network.ApiClient;
+import com.cryptopulse.app.utils.AppPrefs;
 import java.util.*;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
 
@@ -56,10 +64,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
         h.tvTitle.setText(item.getTitle());
         h.tvSnippet.setText(item.getSnippet());
         h.tvTime.setText(item.getTimeAgo());
-        h.tvAuthor.setText("✍ " + (item.getAuthor() != null
-                ? item.getAuthor() : "Unknown"));
+        h.tvAuthor.setText("✍ " + (item.getAuthor() != null ? item.getAuthor() : "Unknown"));
 
-        // Category badge
         String cat = item.getCategory();
         if (cat != null && !cat.isEmpty()) {
             h.tvCategory.setText(cat);
@@ -73,10 +79,102 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
 
         loadThumbnail(h.ivThumb, item);
         h.itemView.setOnClickListener(v -> listener.onClick(item));
+
+        // ── LOGIC XÓA THÔNG MINH ──
+        String userRole = AppPrefs.get().getUserRole();
+        if ("admin".equals(userRole)) {
+            h.btnDeleteNews.setVisibility(View.VISIBLE);
+            h.btnDeleteNews.setOnClickListener(v -> {
+                int currentPos = h.getAdapterPosition();
+                if (currentPos == RecyclerView.NO_POSITION) return;
+
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Xác nhận xóa")
+                        .setMessage("Bạn có chắc muốn xóa bài viết này?")
+                        .setPositiveButton("Xóa", (dialog, which) -> {
+                            String rawId = String.valueOf(item.getId());
+
+                            if (rawId == null || rawId.isEmpty() || rawId.equals("null")) {
+                                Toast.makeText(v.getContext(), "Lỗi: Không có ID!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            // PHÂN TÁCH LOGIC: CHẶN URL HOẶC XÓA ID SỐ
+                            if (rawId.startsWith("http")) {
+                                // Tin thị trường -> Thêm vào sổ đen (Blacklist)
+                                hideNewsFromApi(v.getContext(), rawId, currentPos);
+                            } else {
+                                // Tin nội bộ -> Xóa trong MySQL
+                                try {
+                                    int newsId = (int) Double.parseDouble(rawId);
+                                    deleteNewsFromApi(v.getContext(), newsId, currentPos);
+                                } catch (Exception e) {
+                                    Toast.makeText(v.getContext(), "Lỗi định dạng ID!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Hủy", null)
+                        .show();
+            });
+        } else {
+            h.btnDeleteNews.setVisibility(View.GONE);
+        }
+    }
+
+    // ── 1. GỌI API CHẶN TIN THỊ TRƯỜNG (REDIS BLACKLIST) ──
+    private void hideNewsFromApi(Context context, String url, int position) {
+        String token = "Bearer " + AppPrefs.get().getJwtToken();
+        Map<String, String> body = new HashMap<>();
+        body.put("url", url);
+
+        ApiClient.get().hideWhaleNews(token, body).enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Đã chặn vĩnh viễn bài báo này!", Toast.LENGTH_SHORT).show();
+                    removeItemFromList(position);
+                } else {
+                    Toast.makeText(context, "Lỗi Server chặn tin!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                Toast.makeText(context, "Mất kết nối!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // ── 2. GỌI API XÓA TIN NỘI BỘ (MYSQL) ──
+    private void deleteNewsFromApi(Context context, int newsId, int position) {
+        String token = "Bearer " + AppPrefs.get().getJwtToken();
+
+        ApiClient.get().deleteNews(token, newsId).enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Đã xóa bài viết!", Toast.LENGTH_SHORT).show();
+                    removeItemFromList(position);
+                } else {
+                    Toast.makeText(context, "Lỗi Server xóa tin!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                Toast.makeText(context, "Lỗi mạng!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void removeItemFromList(int position) {
+        if (position >= 0 && position < items.size()) {
+            items.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, items.size());
+        }
     }
 
     // ══════════════════════════════════════════════════════════
-    //  LOAD ẢNH
+    //  PHẦN TẢI ẢNH
     // ══════════════════════════════════════════════════════════
     private void loadThumbnail(ImageView iv, NewsItem item) {
         if (iv == null) return;
@@ -89,12 +187,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
         boolean hasReal = imgUrl != null && imgUrl.trim().startsWith("http");
 
         if (!hasReal) {
-            // Không có ảnh thật → logo coin ngay, không cần request
             showLogoFallback(iv, fallbackUrl, bg);
             return;
         }
 
-        // Có ảnh thật → thử load, dùng .error() đúng cách của Glide
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         iv.setPadding(0, 0, 0, 0);
         iv.setBackgroundColor(0xFF1A2E1F);
@@ -129,14 +225,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
                             Object model,
                             Target<android.graphics.drawable.Drawable> target,
                             boolean isFirstResource) {
-                        // Dùng Handler.post() để đổi scaleType SAU khi callback kết thúc
-                        // Tránh IllegalStateException
                         mainHandler.post(() -> {
                             iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                             int pad = dpToPx(iv.getContext(), 28);
                             iv.setPadding(pad, pad, pad, pad);
                         });
-                        // Trả về false để Glide tự xử lý .error() request
                         return false;
                     }
 
@@ -147,7 +240,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
                             Target<android.graphics.drawable.Drawable> target,
                             DataSource dataSource,
                             boolean isFirstResource) {
-                        // Ảnh thật load OK → giữ nguyên centerCrop
                         return false;
                     }
                 })
@@ -199,7 +291,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
         }
     }
 
-    private int dpToPx(android.content.Context ctx, int dp) {
+    private int dpToPx(Context ctx, int dp) {
         return Math.round(dp * ctx.getResources().getDisplayMetrics().density);
     }
 
@@ -207,17 +299,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
 
     static class VH extends RecyclerView.ViewHolder {
         TextView  tvTitle, tvSnippet, tvCategory, tvTime, tvAuthor, tvReadTime;
-        ImageView ivThumb;
+        ImageView ivThumb, btnDeleteNews;
 
         VH(View v) {
             super(v);
-            tvTitle    = v.findViewById(R.id.tv_news_title);
-            tvSnippet  = v.findViewById(R.id.tv_news_summary);
-            tvCategory = v.findViewById(R.id.tv_news_category);
-            tvTime     = v.findViewById(R.id.tv_news_time);
-            tvAuthor   = v.findViewById(R.id.tv_news_author);
-            tvReadTime = v.findViewById(R.id.tv_read_time);
-            ivThumb    = v.findViewById(R.id.iv_news_thumb);
+            tvTitle       = v.findViewById(R.id.tv_news_title);
+            tvSnippet     = v.findViewById(R.id.tv_news_summary);
+            tvCategory    = v.findViewById(R.id.tv_news_category);
+            tvTime        = v.findViewById(R.id.tv_news_time);
+            tvAuthor      = v.findViewById(R.id.tv_news_author);
+            tvReadTime    = v.findViewById(R.id.tv_read_time);
+            ivThumb       = v.findViewById(R.id.iv_news_thumb);
+            btnDeleteNews = v.findViewById(R.id.btn_delete_news);
         }
     }
 }

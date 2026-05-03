@@ -52,7 +52,7 @@
                 android:id="@+id/btn_profile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_profile"
+                android:src="@drawable/ic_user"
                 app:tint="@color/text_primary"
                 android:background="@drawable/bg_icon_btn"
                 android:padding="8dp"

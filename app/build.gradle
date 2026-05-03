@@ -1,4 +1,8 @@
-plugins { id 'com.android.application' }
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
 android {
     namespace 'com.cryptopulse.app'
     compileSdk 34
@@ -9,8 +13,24 @@ android {
     }
     buildFeatures { viewBinding true }
     compileOptions { sourceCompatibility JavaVersion.VERSION_11; targetCompatibility JavaVersion.VERSION_11 }
-    buildTypes { release { minifyEnabled false } }
+    signingConfigs {
+        release {
+            storeFile     file("cryptopulse-release.jks")   // tạo ở bước 6
+            storePassword "nhap_mat_khau_cua_ban"
+            keyAlias      "cryptopulse"
+            keyPassword   "nhap_mat_khau_cua_ban"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled   true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
 }
+
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
@@ -33,6 +53,12 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
     implementation 'androidx.browser:browser:1.8.0'
+    implementation 'com.google.android.gms:play-services-auth:21.0.0'
+    implementation platform('com.google.firebase:firebase-bom:34.12.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.cloudinary:cloudinary-android:3.0.2'
 }

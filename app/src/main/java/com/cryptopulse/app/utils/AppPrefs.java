@@ -11,15 +11,16 @@ public class AppPrefs {
     private static final String KEY_LOGGED_IN  = "logged_in";
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_BACKEND_URL= "backend_url";
-    private static final String DEFAULT_BACKEND = "http://10.0.2.2:8000";
-
-    // --- ĐÃ THÊM: Các Key lưu trữ cho Profile ---
+    private static final String DEFAULT_BACKEND = "https://cryptopulse-backend-n2gg.onrender.com";
+    // --- Các Key lưu trữ cho Profile và Auth ---
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_USER_PHONE = "user_phone";
     private static final String KEY_USER_AVATAR = "user_avatar";
+    private static final String KEY_JWT_TOKEN = "jwt_token";
+    private static final String KEY_USER_ROLE = "user_role";
+    private static final String KEY_USER_ID   = "user_id";
 
     private static AppPrefs INSTANCE;
-
     private final SharedPreferences prefs;
 
     public AppPrefs(Context context) {
@@ -34,14 +35,12 @@ public class AppPrefs {
         }
     }
 
-    // ĐÃ THÊM: init() gọi từ Application
     public static void init(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new AppPrefs(context.getApplicationContext());
         }
     }
 
-    // ĐÃ THÊM: get() dùng ở bất kỳ đâu không cần Context
     public static AppPrefs get() {
         if (INSTANCE == null) throw new IllegalStateException("AppPrefs chưa được init!");
         return INSTANCE;
@@ -53,7 +52,7 @@ public class AppPrefs {
     public String getUserEmail() { return prefs.getString(KEY_USER_EMAIL, ""); }
     public void setUserEmail(String email) { prefs.edit().putString(KEY_USER_EMAIL, email).apply(); }
 
-    // --- ĐÃ THÊM: Các hàm Get/Set cho Profile ---
+    // --- Các hàm Get/Set cho Profile ---
     public String getUserName() { return prefs.getString(KEY_USER_NAME, ""); }
     public void setUserName(String name) { prefs.edit().putString(KEY_USER_NAME, name).apply(); }
 
@@ -62,7 +61,17 @@ public class AppPrefs {
 
     public String getUserAvatar() { return prefs.getString(KEY_USER_AVATAR, ""); }
     public void setUserAvatar(String uri) { prefs.edit().putString(KEY_USER_AVATAR, uri).apply(); }
-    // --------------------------------------------
+
+    // --- ĐÂY LÀ PHẦN BẠN BỊ THIẾU: Các hàm Get/Set cho Token và Phân quyền ---
+    public String getJwtToken() { return prefs.getString(KEY_JWT_TOKEN, ""); }
+    public void setJwtToken(String token) { prefs.edit().putString(KEY_JWT_TOKEN, token).apply(); }
+
+    public String getUserRole() { return prefs.getString(KEY_USER_ROLE, "user"); }
+    public void setUserRole(String role) { prefs.edit().putString(KEY_USER_ROLE, role).apply(); }
+
+    public int getUserId() { return prefs.getInt(KEY_USER_ID, 0); }
+    public void setUserId(int id) { prefs.edit().putInt(KEY_USER_ID, id).apply(); }
+    // ------------------------------------------------------------------------
 
     public String getBackendUrl() { return prefs.getString(KEY_BACKEND_URL, DEFAULT_BACKEND); }
     public void setBackendUrl(String url) { prefs.edit().putString(KEY_BACKEND_URL, url).apply(); }
@@ -76,4 +85,5 @@ public class AppPrefs {
         prefs.edit().putStringSet(KEY_FAVORITES, favs).apply();
     }
     public boolean isFavorite(String symbol) { return getFavorites().contains(symbol); }
+
 }

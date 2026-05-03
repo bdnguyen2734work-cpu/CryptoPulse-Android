@@ -1,234 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/bg_card"
-    android:paddingBottom="32dp">
-
-    <View
-        android:layout_width="40dp"
-        android:layout_height="4dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/border"/>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="24dp">
-
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:background="@drawable/bg_avatar"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_profile"
-            app:tint="@color/accent_green"/>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btn_change_avatar"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="bottom|end"
-            app:cardBackgroundColor="@color/accent_green"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="4dp"
-            app:strokeColor="@color/bg_card"
-            app:strokeWidth="2dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@android:drawable/ic_menu_camera"
-                android:padding="6dp"
-                app:tint="@color/bg_primary"/>
-        </androidx.cardview.widget.CardView>
-    </FrameLayout>
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="24dp">
+        android:gravity="center_horizontal">
 
-        <TextView
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_marginBottom="24dp"
+            android:background="#40FFFFFF" />
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tên hiển thị"
-            android:textSize="13sp"
-            android:textColor="@color/text_secondary"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="6dp"/>
-        <EditText
-            android:id="@+id/et_profile_username"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_search"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/text_primary"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif"
-            android:hint="Ví dụ: CryptoPulse Member"
-            android:textColorHint="@color/text_tertiary"
-            android:singleLine="true"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="32dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/circle_bg"
+                android:padding="20dp"
+                android:src="@drawable/ic_user"
+                app:tint="#00E676" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/circle_bg_green"
+                android:padding="6dp"
+                android:src="@drawable/ic_camera"
+                app:tint="#FFFFFF" />
+        </FrameLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email đăng ký"
-            android:textSize="13sp"
-            android:textColor="@color/text_secondary"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="6dp"/>
-        <EditText
-            android:id="@+id/et_profile_email"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_search"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/text_primary"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif"
-            android:inputType="textEmailAddress"
-            android:hint="example@email.com"
-            android:textColorHint="@color/text_tertiary"
-            android:singleLine="true"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textColorHint="#888888"
+            app:boxBackgroundColor="#1E1E1E"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="#00E676"
+            app:hintTextColor="#00E676">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tên hiển thị"
+                android:textColor="#FFFFFF"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Số điện thoại"
-            android:textSize="13sp"
-            android:textColor="@color/text_secondary"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="6dp"/>
-        <EditText
-            android:id="@+id/et_profile_phone"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/bg_search"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/text_primary"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif"
-            android:inputType="phone"
-            android:hint="0123 456 789"
-            android:textColorHint="@color/text_tertiary"
-            android:singleLine="true"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp"
+            app:boxBackgroundColor="#151515"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeWidth="0dp">
 
-        <Button
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email đăng ký (Không thể đổi)"
+                android:textColor="#888888"
+                android:enabled="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:textColorHint="#888888"
+            app:boxBackgroundColor="#1E1E1E"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxStrokeColor="#00E676"
+            app:hintTextColor="#00E676">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_profile_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Số điện thoại"
+                android:textColor="#FFFFFF"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_profile"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="32dp"
             android:text="LƯU THAY ĐỔI"
-            android:textColor="@color/bg_primary"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif"
+            android:textColor="#121212"
             android:textStyle="bold"
-            android:background="@drawable/btn_green_selector"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_marginBottom="20dp"/>
-    </LinearLayout>
+            app:backgroundTint="#00E676"
+            app:cornerRadius="12dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/border"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="16dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp">
-
-        <LinearLayout
-            android:id="@+id/item_settings"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="12dp"
-            android:background="?attr/selectableItemBackground">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Cài đặt (Settings)"
-                android:textSize="15sp"
-                android:textColor="@color/text_primary"
-                android:fontFamily="sans-serif"/>
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_nav_market"
-                app:tint="@color/text_secondary"/>
-        </LinearLayout>
+            android:layout_height="1dp"
+            android:background="#33FFFFFF"
+            android:layout_marginBottom="16dp"/>
 
-        <LinearLayout
-            android:id="@+id/item_backend_url"
+        <!-- NÚT ĐĂNG TIN TỨC -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_admin_post_news"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="12dp"
-            android:background="?attr/selectableItemBackground">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cấu hình Backend"
-                    android:textSize="15sp"
-                    android:textColor="@color/text_primary"
-                    android:fontFamily="sans-serif"/>
-                <TextView
-                    android:id="@+id/tv_backend_url"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="—"
-                    android:textSize="11sp"
-                    android:textColor="@color/text_secondary"
-                    android:fontFamily="sans-serif"/>
-            </LinearLayout>
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_nav_market"
-                app:tint="@color/text_secondary"/>
-        </LinearLayout>
+            android:layout_height="55dp"
+            android:layout_marginBottom="12dp"
+            android:text="ĐĂNG TIN TỨC (ADMIN)"
+            android:textColor="#121212"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:backgroundTint="#39FF6E"
+            app:cornerRadius="12dp"/>
+
+        <!-- NÚT QUẢN LÝ USER -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_admin_user"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="12dp"
+            android:text="QUẢN LÝ NGƯỜI DÙNG (ADMIN)"
+            android:textColor="#121212"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:backgroundTint="#00E676"
+            app:cornerRadius="12dp"/>
+
+        <!-- NÚT THỐNG KÊ DASHBOARD VỪA THÊM -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_admin_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="12dp"
+            android:text="THỐNG KÊ DASHBOARD (ADMIN)"
+            android:textColor="#121212"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:backgroundTint="#00E676"
+            app:cornerRadius="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="ĐĂNG XUẤT"
+            android:textColor="#FF5252"
+            android:textStyle="bold"
+            app:strokeColor="#FF5252"
+            app:strokeWidth="1.5dp"
+            app:cornerRadius="12dp" />
+
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/border"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="24dp"
-        android:text="ĐĂNG XUẤT"
-        android:textColor="#FF4444"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:background="@drawable/bg_logout_btn"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
