@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements BinanceWebSocketManager.Ti
     private void setupCoinList(View v) {
         RecyclerView rv = v.findViewById(R.id.rv_coins);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
-        rv.setHasFixedSize(true);
+        rv.setHasFixedSize(false);
         rv.setItemAnimator(null);
         adapter = new CoinListAdapter(new ArrayList<>(), ticker -> openDetail(ticker.symbol));
         rv.setAdapter(adapter);

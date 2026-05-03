@@ -22,6 +22,12 @@
 - Data Binding + ViewModel
 
 ## 📸 Screenshots
+<p float="left">
+  <img src="screenshots/home.png" width="200"/>
+  <img src="screenshots/analysis.png" width="200"/>
+  <img src="screenshots/wallet.png" width="200"/>
+  <img src="screenshots/news.png" width="200"/>
+</p>
 
 ## 🚀 Setup
 1. Clone repo

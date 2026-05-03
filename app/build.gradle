@@ -15,10 +15,10 @@ android {
     compileOptions { sourceCompatibility JavaVersion.VERSION_11; targetCompatibility JavaVersion.VERSION_11 }
     signingConfigs {
         release {
-            storeFile     file("cryptopulse-release.jks")   // tạo ở bước 6
-            storePassword "nhap_mat_khau_cua_ban"
+            storeFile     file("cryptopulse-release.jks")
+            storePassword "cryptopulse123"
             keyAlias      "cryptopulse"
-            keyPassword   "nhap_mat_khau_cua_ban"
+            keyPassword   "cryptopulse123"
         }
     }
     buildTypes {

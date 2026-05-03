@@ -10,6 +10,9 @@ import com.cryptopulse.app.fragments.*;
 import com.cryptopulse.app.network.BinanceWebSocketManager;
 import com.cryptopulse.app.utils.AppPrefs;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.cloudinary.android.MediaManager;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
@@ -24,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         appPrefs = new AppPrefs(this);
-
+        try {
+            Map<String, String> config = new HashMap<>();
+            config.put("cloud_name", "dwy5lsddb");
+            config.put("api_key", "863935666652985");
+            config.put("api_secret", "5DiIiF6qxoCy5nXIUd7eXQxFTlo");
+            MediaManager.init(this, config);
+        } catch (Exception e) {
+        }
         fragments[0] = new HomeFragment();
         fragments[1] = new MarketFragment();
         fragments[2] = new AnalysisFragment();
