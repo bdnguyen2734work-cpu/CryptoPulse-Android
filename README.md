@@ -20,13 +20,43 @@
 - MPAndroidChart
 - Cloudinary (avatar)
 - Data Binding + ViewModel
-
 ## 📸 Screenshots
+
+### 🏠 Home & Market
 <p float="left">
-  <img src="screenshots/home.png" width="200"/>
-  <img src="screenshots/analysis.png" width="200"/>
-  <img src="screenshots/wallet.png" width="200"/>
-  <img src="screenshots/news.png" width="200"/>
+  <img src="screenshots/home.png" width="180"/>
+  <img src="screenshots/home1.png" width="180"/>
+  <img src="screenshots/market.png" width="180"/>
+  <img src="screenshots/coinlist.png" width="180"/>
+  <img src="screenshots/coinlist1.png" width="180"/>
+</p>
+
+### 📊 Analysis
+<p float="left">
+  <img src="screenshots/analysis.png" width="180"/>
+  <img src="screenshots/analysis1.png" width="180"/>
+  <img src="screenshots/analysis2.png" width="180"/>
+</p>
+
+### 📰 News
+<p float="left">
+  <img src="screenshots/news.png" width="180"/>
+  <img src="screenshots/news1.png" width="180"/>
+  <img src="screenshots/news2.png" width="180"/>
+</p>
+
+### 💼 Wallet
+<p float="left">
+  <img src="screenshots/wallet.png" width="180"/>
+  <img src="screenshots/wallet1.png" width="180"/>
+  <img src="screenshots/wallet2.png" width="180"/>
+</p>
+
+### 🔐 Auth
+<p float="left">
+  <img src="screenshots/login.png" width="180"/>
+  <img src="screenshots/register.png" width="180"/>
+  <img src="screenshots/search.png" width="180"/>
 </p>
 
 ## 🚀 Setup
