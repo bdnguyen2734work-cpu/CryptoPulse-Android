@@ -47,7 +47,8 @@
                 android:text=""
                 android:textSize="10sp"
                 android:textColor="@color/text_tertiary"
-                android:fontFamily="sans-serif"/>
+                android:fontFamily="sans-serif"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

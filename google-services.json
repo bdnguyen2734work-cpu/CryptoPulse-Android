@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "544581672301",
+    "project_id": "cryptopulse-aae16",
+    "storage_bucket": "cryptopulse-aae16.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544581672301:android:e0982b4810f96648e0ce64",
+        "android_client_info": {
+          "package_name": "com.cryptopulse.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544581672301-icqllh5o18482jivtmtm4t3169q382i7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cryptopulse.app",
+            "certificate_hash": "aff9dfa42b75f1d5988d9fd262eb6f9161271386"
+          }
+        },
+        {
+          "client_id": "544581672301-jchc4ftgs757rvnavp6ls75oena3vi9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cryptopulse.app",
+            "certificate_hash": "084690338a973c99e200f44efd5f123abdcbe412"
+          }
+        },
+        {
+          "client_id": "544581672301-7dkon5jq3iquhtbpk0j77h608tcnhjto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDhwdYkrXHcFYEBt6w1hHkVgKNX3kTbZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544581672301-7dkon5jq3iquhtbpk0j77h608tcnhjto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

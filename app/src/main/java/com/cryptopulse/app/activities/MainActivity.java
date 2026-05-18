@@ -3,14 +3,21 @@ package com.cryptopulse.app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.cloudinary.android.MediaManager;
 import com.cryptopulse.app.R;
-import com.cryptopulse.app.fragments.*;
+import com.cryptopulse.app.fragments.AnalysisFragment;
+import com.cryptopulse.app.fragments.HomeFragment;
+import com.cryptopulse.app.fragments.MarketFragment;
+import com.cryptopulse.app.fragments.NewsFragment;
+import com.cryptopulse.app.fragments.WalletFragment;
 import com.cryptopulse.app.network.BinanceWebSocketManager;
 import com.cryptopulse.app.utils.AppPrefs;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.cloudinary.android.MediaManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,15 +33,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        appPrefs = new AppPrefs(this);
-        try {
+        appPrefs = AppPrefs.get();
+
+        // ── KHỞI TẠO CLOUDINARY AN TOÀN ──
+        if (!isCloudinaryInitialized()) {
             Map<String, String> config = new HashMap<>();
             config.put("cloud_name", "dwy5lsddb");
             config.put("api_key", "863935666652985");
             config.put("api_secret", "5DiIiF6qxoCy5nXIUd7eXQxFTlo");
             MediaManager.init(this, config);
-        } catch (Exception e) {
         }
+
+        // ── KHỞI TẠO FRAGMENTS ──
         fragments[0] = new HomeFragment();
         fragments[1] = new MarketFragment();
         fragments[2] = new AnalysisFragment();
@@ -72,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         BinanceWebSocketManager.getInstance().connect();
     }
 
+    /**
+     * Hàm chuyển đổi Fragment an toàn và mượt mà
+     */
     private void switchFragment(int index) {
         if (index == currentIndex) return;
         Fragment next = fragments[index];
@@ -82,6 +95,19 @@ public class MainActivity extends AppCompatActivity {
         }
         tx.hide(fragments[currentIndex]).show(next).commit();
         currentIndex = index;
+    }
+
+    /**
+     * Hàm kiểm tra trạng thái khởi tạo của Cloudinary
+     * Sử dụng cách bắt IllegalStateException để xử lý triệt để lỗi khi gọi .get() trước khi .init()
+     */
+    private boolean isCloudinaryInitialized() {
+        try {
+            MediaManager.get();
+            return true;
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     @Override

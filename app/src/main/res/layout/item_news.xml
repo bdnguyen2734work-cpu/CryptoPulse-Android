@@ -154,7 +154,8 @@
                     android:layout_height="wrap_content"
                     android:text="  →"
                     android:textSize="14sp"
-                    android:textColor="@color/accent_green"/>
+                    android:textColor="@color/accent_green"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

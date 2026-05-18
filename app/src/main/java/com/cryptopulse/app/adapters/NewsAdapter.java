@@ -75,7 +75,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.VH> {
         }
 
         if (h.tvReadTime != null)
-            h.tvReadTime.setText(item.getReadTime() != null ? item.getReadTime() : "");
+            h.tvReadTime.setVisibility(View.GONE);
 
         loadThumbnail(h.ivThumb, item);
         h.itemView.setOnClickListener(v -> listener.onClick(item));
